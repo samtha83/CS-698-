@@ -1,0 +1,42 @@
+#!/bin/sh
+#
+# Usage: gputest.sh
+# Change job name and email address as needed 
+#        
+# -- our name ---
+#$ -N  code_svm_BD
+#$ -S /bin/sh
+# Make sure that the .e and .o file arrive in the
+#working directory
+#$ -cwd
+#Merge the standard out and standard error to one file
+#$ -j y
+# Request a gpu
+# #$ -q gpu
+#$ -q datasci
+
+/bin/echo Running on host: `hostname`.
+/bin/echo In directory: `pwd`
+/bin/echo Starting on: `date`
+ 
+# Load CUDA module
+. /opt/modules/init/bash
+module load cuda
+module load python3
+module load gsl-gnu4
+export LD_LIBRARY_PATH=/opt/gsl/1.15/gnu4/lib:$LD_LIBRARY_PATH
+
+#Full path to executable
+#Replace usman's home directory path with yours in the command below
+
+#/usr/bin/time -f %e -o chi2time /home/u/usman/courses/cs698_spring18/Chi2_opencl/Chi2 /home/u/usman/courses/cs698_spring18/Chi2_opencl/traindata.txt 8000 29623 4000 4000 /home/u/usman/courses/cs698_spring18/Chi2_opencl/kernel_file.cl 0 > output
+
+
+#/usr/bin/time -f %e -o HW2time /home/s/sr852/HW2/HW2 10 10 /home/s/sr852/HW2/traindata.txt /home/s/sr852/HW2/vector.txt /home/s/sr852/HW2/kernel_file_HW2.cl 0 > output
+
+
+
+#/usr/bin/time -f %e -o code_v30utput python /home/s/sr852/project/code_v3.py /home/s/sr852/project > output
+
+
+/usr/bin/time -f %e -o code_svmOutput_final  python /home/s/sr852/project/code_svm_BD.py /home/s/sr852/project > output_svm_final
